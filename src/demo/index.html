@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HeapLab — Simulador de Min-Heap e Max-Heap</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topo">
+    <div>
+      <p class="eyebrow">ESTRUTURAS DE DADOS · P2</p>
+      <h1>HeapLab</h1>
+      <p class="subtitulo">Visualize como uma fila de prioridade organiza seus elementos.</p>
+    </div>
+    <span class="tag">Min-Heap / Max-Heap</span>
+  </header>
+
+  <main>
+    <section class="painel controles">
+      <div class="linha-controles">
+        <label>Tipo de Heap
+          <select id="tipoHeap">
+            <option value="min">Min-Heap</option>
+            <option value="max">Max-Heap</option>
+          </select>
+        </label>
+        <label>Valor para inserir
+          <input id="valorInput" type="number" value="12" step="1">
+        </label>
+        <button id="inserirBtn" class="primario">Inserir</button>
+        <button id="extrairBtn">Extract (remover raiz)</button>
+        <button id="peekBtn">Peek (consultar raiz)</button>
+      </div>
+      <div class="linha-controles">
+        <button id="playBtn" class="primario">▶ Executar / Play</button>
+        <button id="stepBtn">Próximo passo</button>
+        <button id="pauseBtn">Ⅱ Pausar</button>
+        <button id="resetBtn">↺ Reiniciar</button>
+        <label>Velocidade
+          <select id="velocidade">
+            <option value="1200">Lenta</option>
+            <option value="700" selected>Normal</option>
+            <option value="300">Rápida</option>
+          </select>
+        </label>
+      </div>
+      <div class="linha-controles cenarios">
+        <strong>Cenários:</strong>
+        <button data-cenario="medio">Caso Médio</button>
+        <button data-cenario="pior">Pior Caso (sift-up)</button>
+        <button data-cenario="custom">Exemplo Customizado</button>
+        <span class="ajuda">Carregar cenário substitui o heap atual.</span>
+      </div>
+    </section>
+
+    <section class="grade-visual">
+      <article class="painel">
+        <div class="titulo-painel">
+          <div><h2>Árvore Binária Completa</h2><p>O mesmo heap representado como árvore.</p></div>
+          <span class="legenda"><i></i> elemento em destaque</span>
+        </div>
+        <div id="arvore" class="arvore" aria-live="polite"></div>
+      </article>
+      <article class="painel">
+        <div class="titulo-painel">
+          <div><h2>Array Subjacente</h2><p>Índices e relações entre posições.</p></div>
+        </div>
+        <div id="arrayView" class="array-view"></div>
+        <div class="formulas">
+          <p><code>pai(i) = (i - 1) // 2</code></p>
+          <p><code>esq(i) = 2 * i + 1</code></p>
+          <p><code>dir(i) = 2 * i + 2</code></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="grade-inferior">
+      <article class="painel estado">
+        <h2>Passo atual</h2>
+        <p id="mensagem" class="mensagem">Carregue um cenário ou insira um valor para começar.</p>
+        <div class="variaveis">
+          <div><span>Índice atual</span><strong id="indiceAtual">—</strong></div>
+          <div><span>Índice do pai</span><strong id="indicePai">—</strong></div>
+          <div><span>Filhos</span><strong id="filhos">—</strong></div>
+          <div><span>Operação</span><strong id="operacaoAtual">—</strong></div>
+        </div>
+      </article>
+      <article class="painel metricas">
+        <h2>Métricas acumuladas</h2>
+        <div class="metricas-grid">
+          <div><span>Comparações</span><strong id="comparacoes">0</strong></div>
+          <div><span>Trocas</span><strong id="trocas">0</strong></div>
+          <div><span>Operações</span><strong id="operacoes">0</strong></div>
+          <div><span>Elementos</span><strong id="quantidade">0</strong></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="painel">
+      <div class="titulo-painel"><div><h2>Registro de execução</h2><p>Histórico explicativo das etapas.</p></div><button id="limparLogBtn" class="secundario">Limpar registro</button></div>
+      <ol id="log" class="log"></ol>
+    </section>
+
+    <footer>HeapLab · Implementação didática de Heap Binário em array · Sem bibliotecas externas</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
